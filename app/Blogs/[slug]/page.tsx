@@ -12,7 +12,8 @@ export default async function page({params}: Props) {
   blogdescription,
   "slug": slug.current
    }
-    `)
+    `,
+    { slug: params.slug } )
 const blogs = data[0];
 return (
   <div className="bg-gray-100 min-h-screen">
