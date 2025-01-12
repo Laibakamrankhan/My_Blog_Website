@@ -1,7 +1,7 @@
 import { client } from '@/sanity/lib/client';
 import React from 'react';
 import Link from 'next/link';
-
+import Image from 'next/image';
 interface BlogCardProps {
   category: string;
   title: string;
@@ -14,11 +14,13 @@ const BlogCard: React.FC<BlogCardProps> = ({ category, title, description, image
   return (
     <div className="p-4 md:w-1/3">
       <div className="h-full border-2 border-[#185519] border-opacity-60 rounded-lg overflow-hidden bg-white">
-        <img
-          className="lg:h-48 md:h-36 w-full object-cover object-center"
-          src={imageUrl}
-          alt="blog"
-        />
+      <Image
+      className="lg:h-48 md:h-36 w-full object-cover object-center"
+      src={imageUrl}
+      alt="blog"
+      width={400} // You might want to set appropriate width
+      height={300} // And height for your image
+    />
         <div className="p-6">
           <h2 className="tracking-widest text-xs title-font font-medium text-[#185519] mb-1">
             {category}
@@ -65,7 +67,7 @@ const BlogSection: React.FC = async () => {
     <section className="text-gray-600 body-font">
       <div className="container px-5 py-24 mx-auto">
         <div className="flex flex-wrap -m-4">
-          {blogs.map((blog: any, index: any) => (
+          {blogs.map((blog: any |string , index:string | any) => (
             <BlogCard
               key={index}
               category={blog.category}
