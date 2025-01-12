@@ -1,19 +1,24 @@
 import { client } from '@/sanity/lib/client';
 import { PortableText } from '@portabletext/react';
 
-interface Tdata {
+interface Props {
   params: {
-      slug: string
-  }
+    slug: string;
+  };
 }
-export default async function page({params}: Tdata ) {
-  const data = await client.fetch(`*[_type == "blog" && slug.current == "${params.slug}"]{
-  title,
-  blogdescription,
-  "slug": slug.current
-   }
-    `,
-    { slug: params.slug } )
+
+export default async function Page({ params }: Props) {
+  const { slug } = params;
+
+  // Fetch data from Sanity using the slug
+  const data = await client.fetch(
+    `*[_type == "blog" && slug.current == $slug]{
+      title,
+      blogdescription,
+      "slug": slug.current
+    }`,
+    { slug }
+  );
 const blogs = data[0];
 return (
   <div className="bg-gray-100 min-h-screen">
