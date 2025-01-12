@@ -60,14 +60,20 @@ async function getdata() {
   }`);
   return fetchData;
 }
-
+interface Blog {
+  category: string;
+  title: string;
+  description: string;
+  imageUrl: string;
+  slug: string;
+}
 const BlogSection: React.FC = async () => {
   const blogs = await getdata();
   return (
     <section className="text-gray-600 body-font">
       <div className="container px-5 py-24 mx-auto">
         <div className="flex flex-wrap -m-4">
-          {blogs.map((blog: any |string , index:string | any) => (
+          {blogs.map((blog: Blog , index:number ) => (
             <BlogCard
               key={index}
               category={blog.category}
