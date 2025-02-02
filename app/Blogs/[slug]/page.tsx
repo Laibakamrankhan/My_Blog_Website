@@ -1,15 +1,21 @@
 import { client } from '@/sanity/lib/client';
 import { PortableText } from '@portabletext/react';
 
+
+interface Blog {
+  title: string;
+  blogdescription: string
+  slug: string;
+}
+
 export default async function Page({
   params,
 }: {
   params: { slug: string };
 }) {
   const { slug } = params;
- 
 
-  const data = await client.fetch(
+  const data = await client.fetch<Blog[]>(
     `*[_type == "blog" && slug.current == $slug]{
       title,
       blogdescription,
@@ -17,6 +23,7 @@ export default async function Page({
     }`,
     { slug }
   );
+  
 const blogs = data[0];
 return (
   <div className="bg-gray-100 min-h-screen">
