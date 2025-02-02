@@ -1,6 +1,6 @@
 import { client } from '@/sanity/lib/client';
 import { PortableText } from '@portabletext/react';
-
+import { notFound } from "next/navigation";
 
 export default async function Page({ params }: { params: { slug: string } }) {
   const { slug } = params;
@@ -22,7 +22,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
     }
   } catch (error) {
     console.error("Error fetching blog data:", error);
-    return <div className="text-red-500 text-center mt-10">Error loading blog. Please try again later.</div>;
+  return notFound(); // If no blog found, show 404 page;
   } finally {
     console.log("Sanity fetch attempt complete.");
   }
