@@ -1,13 +1,10 @@
 import { client } from '@/sanity/lib/client';
 import { PortableText } from '@portabletext/react';
 
-
-
-export default async function Page({
-  params,
-}: {
+interface BlogPageProps {
   params: { slug: string };
-}) {
+}
+export default async function Page({ params }: BlogPageProps) {
   const { slug } = params;
   console.log("Params:", params);
 
