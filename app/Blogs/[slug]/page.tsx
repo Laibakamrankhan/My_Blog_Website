@@ -1,16 +1,14 @@
 import { client } from '@/sanity/lib/client';
 import { PortableText } from '@portabletext/react';
 
-interface Props {
-  params: {
-    slug: string;
-  };
-}
-
-export default async function Page({ params }: Props) {
+export default async function Page({
+  params,
+}: {
+  params: { slug: string };
+}) {
   const { slug } = params;
+ 
 
-  // Fetch data from Sanity using the slug
   const data = await client.fetch(
     `*[_type == "blog" && slug.current == $slug]{
       title,
